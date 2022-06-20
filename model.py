@@ -4,7 +4,7 @@ import numpy as np
 class EchoStateNetwork():
 
 
-    def __init__(self, units=300, SR=0.99, input_shape=1, input_dims=1, output_shape=1, W_in_scale=0.1, W_res_scale=0.1, W_res_density=0.1, W_fb_scale=0.1, leak_rate=1.0, alpha=1.0e-4, seed=0, feedback=True):
+    def __init__(self, units=300, SR=0.99, input_shape=1, input_dims=1, output_shape=1, W_in_scale=1.0, W_res_scale=0.1, W_res_density=0.1, W_fb_scale=0.1, leak_rate=1.0, alpha=1.0e-4, seed=0, feedback=True):
 
         def W_res_create(shape, SR=0.99, scale=1.0, density=0.1):
 

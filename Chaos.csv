@@ -1,4 +1,4 @@
-Lorenz X,Lorenz Y,Lorenz Z,Rossler X,Rossler Y,Rossler Z,Duffing,Logistic
+Lorenz-X,Lorenz-Y,Lorenz-Z,Rossler-X,Rossler-Y,Rossler-Z,Duffing,Logistic
 1,1,1,1,1,1,0.5,0.1
 1.048866273,1.523931625,0.973111758,0.98,1.01,0.969,0.5,0.36
 1.186917938,2.088447277,0.961734059,0.96,1.03,0.94,0.5,0.9216

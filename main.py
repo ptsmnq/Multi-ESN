@@ -2,6 +2,7 @@ import numpy as np, pandas as pd, matplotlib.pyplot as plt
 from model import EchoStateNetwork as ESN, functions
 plt.rcParams['font.size'] = 15
 
+# read data
 dataframe = pd.read_csv('Chaos.csv', encoding='utf_8', usecols=[0], nrows=3000)
 dataset = np.array(dataframe.astype('float'))
 
@@ -9,6 +10,7 @@ func = functions()
 test_size, sample, sparse = 0.5, 3, 5
 look_back = (sample-1) * sparse + 1
 
+# create dataset
 train = dataset[:int(len(dataset)*test_size), :]
 test = dataset[int(len(dataset)*test_size)-look_back:, :]
 trainX, trainY = func.create_dataset(train, look_back, sparse, sample)
@@ -62,11 +64,13 @@ freerun_data = test[:look_back, :]
 model.reset_reservoir()
 test_pred = model.freerun(freerun_data, sparse, pred_range=pred_range)
 
+# evaluation
 train_score = func.rmse(trainY[:,0], train_pred[:,0])
 test_score = func.rmse(testY[:pred_range,0], test_pred[:,0])
 print('training score : %.4f RMSE' %train_score)
 print('test score : %.4f RMSE' %test_score)
 
+# plot data
 fig = plt.figure(figsize=(16,8))
 ax = fig.add_subplot(111)
 ax.plot(dataframe.iloc[:,0], label='real data')
