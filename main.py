@@ -56,7 +56,7 @@ train_pred = model.predict(trainX)
 # 1step prediction
 #test_pred = model.predict(testX)
 
-#freerun prediction
+# freerun prediction
 pred_range = len(testY)
 freerun_data = test[:look_back, :]
 model.reset_reservoir()

@@ -106,9 +106,9 @@ class functions():
     def create_dataset(self, data, look_back=30, sparse=15, sample=3):
 
         self.data = data
-        self.look_back = look_back
-        self.sparse = sparse
-        self.sample = sample
+        self.look_back = int(look_back)
+        self.sparse = int(sparse)
+        self.sample = int(sample)
 
         dataX, dataY = [], []
         for i in range(len(self.data)-self.look_back):
