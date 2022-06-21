@@ -25,13 +25,13 @@ print("*"*30)
 print("\n")
 
 model = ESN(units=300,
-            SR=0.99,
+            SR=0.95,
             input_shape=trainX.shape[2],
             input_dims=trainX.shape[1],
             output_shape=1,
             W_in_scale=0.1,
             W_res_scale=1.0,
-            W_res_density=0.05,
+            W_res_density=0.1,
             W_fb_scale=0.05,
             leak_rate=1.0,
             alpha=1.0e-4,
