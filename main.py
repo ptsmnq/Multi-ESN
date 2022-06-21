@@ -3,11 +3,11 @@ from model import EchoStateNetwork as ESN, functions
 plt.rcParams['font.size'] = 15
 
 # read data
-dataframe = pd.read_csv('Chaos.csv', encoding='utf_8', usecols=[0], skiprows=1000, nrows=3000)
+dataframe = pd.read_csv('Chaos.csv', encoding='utf_8', usecols=[0], skiprows=1000, nrows=2500)
 dataset = np.array(dataframe.astype('float'))
 
 func = functions()
-test_size, sample, sparse = 0.5, 3, 5
+test_size, sample, sparse = 0.5, 3, 6
 look_back = (sample-1) * sparse + 1
 
 # create dataset
@@ -15,10 +15,12 @@ train = dataset[:int(len(dataset)*test_size), :]
 test = dataset[int(len(dataset)*test_size)-look_back:, :]
 trainX, trainY = func.create_dataset(train, look_back, sparse, sample)
 testX, testY = func.create_dataset(test, look_back, sparse, sample)
+
 print("\n")
 print("*"*30)
 print("Data Information")
 print(f"train data : {train.shape}, test data : {test.shape}")
+print(f"Explanatory variable shape : {trainX.shape}, Objective variable shape : {trainY.shape}")
 print(f"input shape : {trainX.shape[2]}, input dimension : {trainX.shape[1]}")
 print(f"output shape : {trainY.shape[1]}")
 print("*"*30)
@@ -45,7 +47,7 @@ print(f"Neuron : {model.units}")
 print(f"Spectral Radius : {model.SR}")
 print(f"W_in Scale : {model.W_in_scale}")
 print(f"W_res Scale : {model.W_res_scale}")
-print(f"W_res density : {model.W_res_density*100:.1f}%")
+print(f"W_res density : {model.W_res_density*100:.2f}%")
 if model.feedback==True : print(f"W_fb Scale : {model.W_fb_scale}")
 else : print(f"Leaking Rate : {model.leak_rate}")
 print(f"L2 norm : {model.alpha}")
@@ -63,11 +65,12 @@ pred_range = len(testY)
 freerun_data = test[:look_back, :]
 model.reset_reservoir()
 test_pred = model.freerun(freerun_data, sparse, pred_range=pred_range)
+print(test_pred)
 
 # evaluation
 train_score = func.rmse(trainY[:,0], train_pred[:,0])
-test_score = func.rmse(testY[:pred_range,0], test_pred[:,0])
-print('training score : %.4f RMSE' %train_score)
+test_score = func.rmse(testY[:pred_range,0], test_pred[:pred_range,0])
+print('train score : %.4f RMSE' %train_score)
 print('test score : %.4f RMSE' %test_score)
 
 # plot data

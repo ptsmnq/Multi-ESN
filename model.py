@@ -69,10 +69,9 @@ class EchoStateNetwork():
             else : self.x_n = ((1.0 - self.leak_rate) * self.x_n + self.leak_rate * np.tanh(In + Res)).reshape(self.input_dims, self.units)
             pred = np.matmul(self.x_n, self.W_out)
             self.y_n_1 = pred
-            ans.append(pred)
+            ans.append(pred.reshape(-1).tolist())
 
-        return np.reshape(ans, (-1, self.input_dims))
-
+        return np.array(ans)
 
     def freerun(self, x, sparse=1, pred_range=100):
 
@@ -88,10 +87,10 @@ class EchoStateNetwork():
             else : self.x_n = ((1.0 - self.leak_rate) * self.x_n + self.leak_rate * np.tanh(In + Res)).reshape(self.input_dims, self.units)
             pred = np.matmul(self.x_n, self.W_out)
             self.y_n_1 = pred
-            ans.append(pred)
+            ans.append(pred.reshape(-1).tolist())
             x = np.append(x, pred).reshape(-1, self.input_dims)
         
-        return np.reshape(ans, (-1, self.input_dims))
+        return np.array(ans)
     
 
     def reset_reservoir(self):
