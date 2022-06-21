@@ -3,7 +3,7 @@ from model import EchoStateNetwork as ESN, functions
 plt.rcParams['font.size'] = 15
 
 # read data
-dataframe = pd.read_csv('Chaos.csv', encoding='utf_8', usecols=[0], nrows=3000)
+dataframe = pd.read_csv('Chaos.csv', encoding='utf_8', usecols=[0], skiprows=1000, nrows=3000)
 dataset = np.array(dataframe.astype('float'))
 
 func = functions()
