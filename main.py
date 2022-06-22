@@ -65,7 +65,6 @@ pred_range = len(testY)
 freerun_data = test[:look_back, :]
 model.reset_reservoir()
 test_pred = model.freerun(freerun_data, sparse, pred_range=pred_range)
-print(test_pred)
 
 # evaluation
 train_score = func.rmse(trainY[:,0], train_pred[:,0])
