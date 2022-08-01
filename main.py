@@ -7,7 +7,7 @@ dataframe = pd.read_csv('Chaos.csv', encoding='utf_8', usecols=[0], skiprows=100
 dataset = np.array(dataframe.astype('float'))
 
 func = functions()
-test_size, sample, sparse = 0.5, 3, 6
+test_size, sample, sparse = 0.5, 7, 5
 look_back = (sample-1) * sparse + 1
 
 # create dataset

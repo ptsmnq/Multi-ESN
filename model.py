@@ -79,7 +79,7 @@ class EchoStateNetwork():
         for i in range(pred_range):
             data = []
             for j in range(self.input_shape) : data.append(x[i+sparse*j,:])
-            data = np.reshape(data, (self.input_dims, self.input_shape))
+            data = np.transpose(data)
             In = np.matmul(data, self.W_in)
             Res = np.matmul(self.x_n, self.W_res)
             Fb = np.matmul(self.y_n_1, self.W_fb)
@@ -88,7 +88,7 @@ class EchoStateNetwork():
             pred = np.matmul(self.x_n, self.W_out)
             self.y_n_1 = pred
             ans.append(pred.reshape(-1).tolist())
-            x = np.append(x, pred).reshape(-1, self.input_dims)
+            x = np.concatenate([x, pred.reshape(1,-1)], axis=0)
         
         return np.array(ans)
     
@@ -116,7 +116,7 @@ class functions():
             dataX.append(x)
             dataY.append(self.data[i+look_back, :])
 
-        return np.array(dataX).reshape(len(dataX), len(dataX[0][0]), len(dataX[0])), np.array(dataY)
+        return np.array(dataX).transpose(0, 2, 1), np.array(dataY)
 
 
     def rmse(self, real, pred):
